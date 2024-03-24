@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ExpenseList from "../components/expense-list/ExpenseList";
 import ExpenseSummary from "../components/expense-summary/ExpenseSummary";
 import ExpenseTrends from "../components/expense-trends/ExpenseTrends";
@@ -6,6 +7,15 @@ import WalletBalance from "../components/wallet-balance/WalletBalance";
 import "./HomePage.css";
 
 const HomePage = () => {
+  const [walletBalance, setWalletBalance] = useState(0);
+
+  // checking for walletBalance from localStorage, if not found then assign 5000 for first time
+  useEffect(() => {
+    const walletBalance = Number(localStorage.getItem("walletBalance"));
+    console.log(walletBalance);
+    walletBalance ? setWalletBalance(walletBalance) : setWalletBalance(5000);
+  }, []);
+
   return (
     <div className="home-page">
       <header>
@@ -13,7 +23,7 @@ const HomePage = () => {
       </header>
       <main>
         <div className="balance">
-          <WalletBalance />
+          <WalletBalance walletBalance={walletBalance} />
           <TotalExpense />
           <ExpenseSummary />
         </div>

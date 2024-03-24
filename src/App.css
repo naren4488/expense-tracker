@@ -1,0 +1,15 @@
+:root {
+  --bg-primary: #0c0a2d;
+  --bg-secondary: #1a1648;
+}
+
+.app {
+  background-color: var(--bg-primary);
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  padding: 32px 0;
+  text-align: center;
+}

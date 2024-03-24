@@ -1,12 +1,10 @@
 import "./App.css";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <div className="app">
-      <header>
-        <h1>Expense Tracker</h1>
-      </header>
-      <main>Expense Tracker Dashboard</main>
+      <HomePage />
     </div>
   );
 }

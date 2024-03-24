@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import Modal from "react-modal";
-import "./AddBalanceModal.css";
 import { enqueueSnackbar } from "notistack";
+import "./AddBalanceModal.css";
 
 const customStyles = {
   content: {
@@ -66,8 +66,8 @@ const AddBalanceModal = ({ updateBalance }: Props) => {
       >
         <div className="balance-modal">
           <h2>Add Balance</h2>
-          <div className="form-section">
-            <form onSubmit={(e) => handleUpdate(e)}>
+          <div className="balance-form-section">
+            <form className="balance-form" onSubmit={(e) => handleUpdate(e)}>
               <input
                 placeholder="Enter amount"
                 value={amount}
@@ -79,7 +79,10 @@ const AddBalanceModal = ({ updateBalance }: Props) => {
                 Add
               </button>
             </form>
-            <button className="add-balance-btn cancel-btn" onClick={closeModal}>
+            <button
+              className="add-balance-btn balance-cancel-btn"
+              onClick={closeModal}
+            >
               Cancel
             </button>
           </div>

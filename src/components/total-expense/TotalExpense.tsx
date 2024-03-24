@@ -7,11 +7,10 @@ type Props = {
   expenses: TypeExpense[];
   updateExpense: (expense: TypeExpense) => void;
 };
-const TotalExpense = ({ expenses, updateExpenses }: Props) => {
+const TotalExpense = ({ expenses, updateExpense }: Props) => {
   const getTotalExpense = (): number => {
-    console.log(expenses);
     const totalExpenseAmount = expenses.reduce(
-      (total, expense) => total + expense.amount,
+      (total, expense) => total + Number(expense.amount),
       0
     );
     return totalExpenseAmount;
@@ -25,7 +24,7 @@ const TotalExpense = ({ expenses, updateExpenses }: Props) => {
           {getTotalExpense()}
         </span>
       </h3>
-      <AddExpenseModal />
+      <AddExpenseModal updateExpense={updateExpense} />
     </div>
   );
 };

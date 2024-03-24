@@ -5,6 +5,7 @@ import ExpenseTrends from "../components/expense-trends/ExpenseTrends";
 import TotalExpense from "../components/total-expense/TotalExpense";
 import WalletBalance from "../components/wallet-balance/WalletBalance";
 import "./HomePage.css";
+import { enqueueSnackbar } from "notistack";
 
 export type TypeExpense = {
   title: string;
@@ -15,14 +16,13 @@ export type TypeExpense = {
 
 const HomePage = () => {
   const [walletBalance, setWalletBalance] = useState<number>(5000);
-  const [expenses, setExpenses] = useState<TypeExpense[]>([
-    { title: "", amount: 0, date: "", category: "" },
-  ]);
+  const [expenses, setExpenses] = useState<TypeExpense[]>([]);
 
   // getting data from localStorage or else updaing localStorage on pageLoad for firt time
   useEffect(() => {
     // walletBalance
     const walletBalanceLS = Number(localStorage.getItem("walletBalance"));
+    console.log(walletBalanceLS);
     if (walletBalanceLS) {
       setWalletBalance(walletBalanceLS);
     } else {
@@ -52,11 +52,28 @@ const HomePage = () => {
   };
 
   /**
-   *
-   * @param expense
+   * update total expenses and wallet balance accordingly
+   * @param {TypeExpense} expense new added expense
    */
   const addExpense = (expense: TypeExpense) => {
-    console.log(expense);
+    if (expense.amount > walletBalance) {
+      enqueueSnackbar(
+        "Expense is greater that your wallet balance, Please add more balance to your wallet",
+        { variant: "error" }
+      );
+    } else {
+      setExpenses((prevExpenses) => {
+        localStorage.setItem(
+          "expenses",
+          JSON.stringify([...prevExpenses, expense])
+        );
+        return [...prevExpenses, expense];
+      });
+      enqueueSnackbar("Expense added successfully!", {
+        variant: "success",
+      });
+      addBalance(-expense.amount);
+    }
   };
 
   return (

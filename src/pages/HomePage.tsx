@@ -7,14 +7,27 @@ import WalletBalance from "../components/wallet-balance/WalletBalance";
 import "./HomePage.css";
 
 const HomePage = () => {
-  const [walletBalance, setWalletBalance] = useState(0);
+  const [walletBalance, setWalletBalance] = useState<number>(0);
 
   // checking for walletBalance from localStorage, if not found then assign 5000 for first time
   useEffect(() => {
-    const walletBalance = Number(localStorage.getItem("walletBalance"));
-    console.log(walletBalance);
-    walletBalance ? setWalletBalance(walletBalance) : setWalletBalance(5000);
+    const walletBalanceLS = Number(localStorage.getItem("walletBalance"));
+    walletBalanceLS
+      ? setWalletBalance(walletBalanceLS)
+      : setWalletBalance(5000);
+    console.log("home page useEffect", walletBalanceLS);
   }, []);
+
+  /**
+   * update wallet balance along with local strorage
+   * @param {number} amount value of amount to be added in wallet
+   */
+  const addBalance = (amount: number) => {
+    setWalletBalance((prevBalance) => {
+      localStorage.setItem("walletBalance", String(prevBalance + amount));
+      return prevBalance + amount;
+    });
+  };
 
   return (
     <div className="home-page">
@@ -23,7 +36,10 @@ const HomePage = () => {
       </header>
       <main>
         <div className="balance">
-          <WalletBalance walletBalance={walletBalance} />
+          <WalletBalance
+            walletBalance={walletBalance}
+            updateBalance={addBalance}
+          />
           <TotalExpense />
           <ExpenseSummary />
         </div>

@@ -1,5 +1,4 @@
-button {
-  margin-top: 16px;
+.add-balance-btn {
   cursor: pointer;
   padding: 8px 16px;
   border: none;
@@ -8,7 +7,7 @@ button {
   color: white;
 }
 
-button:hover {
+.add-balance-btn:hover {
   background-color: green;
 }
 
@@ -31,12 +30,13 @@ form input {
   border: solid 1px;
 }
 
-form button {
+form .add-balance-btn {
   margin: 0;
 }
 
 .cancel-btn {
   background-color: transparent;
+  margin-top: 16px;
   color: black;
   border: solid 1px black;
 }

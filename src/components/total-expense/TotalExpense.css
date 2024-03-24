@@ -1,0 +1,14 @@
+.total-expense {
+  background-color: var(--bg-secondary);
+  padding: 32px 32px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.total-expense h3 {
+  margin-bottom: 20px;
+}
+
+.total-expense h3 span {
+  color: red;
+}

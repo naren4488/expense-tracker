@@ -55,7 +55,9 @@ const AddBalanceModal = ({ updateBalance }: Props) => {
 
   return (
     <>
-      <button onClick={openModal}>+ Add Balance</button>
+      <button className="add-balance-btn" onClick={openModal}>
+        + Add Balance
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -73,9 +75,11 @@ const AddBalanceModal = ({ updateBalance }: Props) => {
                 onChange={(e) => setAmount(e.target.value)}
                 required
               />
-              <button type="submit">Add</button>
+              <button className="add-balance-btn" type="submit">
+                Add
+              </button>
             </form>
-            <button className="cancel-btn" onClick={closeModal}>
+            <button className="add-balance-btn cancel-btn" onClick={closeModal}>
               Cancel
             </button>
           </div>

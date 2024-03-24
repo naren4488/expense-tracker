@@ -6,16 +6,38 @@ import TotalExpense from "../components/total-expense/TotalExpense";
 import WalletBalance from "../components/wallet-balance/WalletBalance";
 import "./HomePage.css";
 
-const HomePage = () => {
-  const [walletBalance, setWalletBalance] = useState<number>(0);
+export type TypeExpense = {
+  title: string;
+  amount: number;
+  date: string;
+  category: string;
+};
 
-  // checking for walletBalance from localStorage, if not found then assign 5000 for first time
+const HomePage = () => {
+  const [walletBalance, setWalletBalance] = useState<number>(5000);
+  const [expenses, setExpenses] = useState<TypeExpense[]>([
+    { title: "", amount: 0, date: "", category: "" },
+  ]);
+
+  // getting data from localStorage or else updaing localStorage on pageLoad for firt time
   useEffect(() => {
+    // walletBalance
     const walletBalanceLS = Number(localStorage.getItem("walletBalance"));
-    walletBalanceLS
-      ? setWalletBalance(walletBalanceLS)
-      : setWalletBalance(5000);
-    console.log("home page useEffect", walletBalanceLS);
+    if (walletBalanceLS) {
+      setWalletBalance(walletBalanceLS);
+    } else {
+      localStorage.setItem("walletBalance", String(walletBalance));
+    }
+
+    //   expenses
+    const dataLS = localStorage.getItem("expenses");
+    if (dataLS) {
+      const expenses = JSON.parse(dataLS);
+      setExpenses(expenses);
+    } else {
+      console.log(JSON.stringify(expenses));
+      localStorage.setItem("expenses", JSON.stringify(expenses));
+    }
   }, []);
 
   /**
@@ -29,6 +51,14 @@ const HomePage = () => {
     });
   };
 
+  /**
+   *
+   * @param expense
+   */
+  const addExpense = (expense: TypeExpense) => {
+    console.log(expense);
+  };
+
   return (
     <div className="home-page">
       <header>
@@ -40,7 +70,7 @@ const HomePage = () => {
             walletBalance={walletBalance}
             updateBalance={addBalance}
           />
-          <TotalExpense />
+          <TotalExpense expenses={expenses} updateExpense={addExpense} />
           <ExpenseSummary />
         </div>
         <div className="transactions">

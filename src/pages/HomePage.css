@@ -7,6 +7,12 @@ header {
   text-align: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
 .balance {
   /* border: solid 1px red; */
   padding: 16px;

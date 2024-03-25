@@ -6,11 +6,10 @@ type Props = {
 };
 
 const ExpenseList = ({ expenses }: Props) => {
-  // console.log(expenses);
   if (!expenses.length) {
-    return <span>No expense Trends to show</span>;
+    return <span>No expenses to show</span>;
   } else {
-    return <div>ExpenseList</div>;
+    return <div className="">ExpenseList</div>;
   }
 };
 

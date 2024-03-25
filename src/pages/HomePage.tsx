@@ -92,7 +92,7 @@ const HomePage = () => {
         </div>
         <div className="transactions">
           <ExpenseList expenses={expenses} />
-          <ExpenseTrends />
+          <ExpenseTrends expenses={expenses} />
         </div>
       </main>
     </div>

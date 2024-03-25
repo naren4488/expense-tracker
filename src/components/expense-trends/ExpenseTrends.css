@@ -1,0 +1,11 @@
+.expense-trends {
+  /* min-width: 30%; */
+  flex: auto;
+  height: 250px;
+  /* border: solid; */
+}
+
+.expense-trends h3 {
+  text-align: center;
+  margin-top: 8px;
+}

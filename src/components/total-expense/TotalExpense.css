@@ -3,6 +3,7 @@
   padding: 32px 32px;
   border-radius: 16px;
   text-align: center;
+  flex: 1;
 }
 
 .total-expense h3 {

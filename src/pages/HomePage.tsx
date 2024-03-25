@@ -22,7 +22,6 @@ const HomePage = () => {
   useEffect(() => {
     // walletBalance
     const walletBalanceLS = Number(localStorage.getItem("walletBalance"));
-    console.log(walletBalanceLS);
     if (walletBalanceLS) {
       setWalletBalance(walletBalanceLS);
     } else {
@@ -32,7 +31,7 @@ const HomePage = () => {
     //   expenses
     const dataLS = localStorage.getItem("expenses");
     if (dataLS) {
-      const expenses = JSON.parse(dataLS);
+      const expenses: TypeExpense[] = JSON.parse(dataLS);
       setExpenses(expenses);
     } else {
       console.log(JSON.stringify(expenses));
@@ -62,12 +61,13 @@ const HomePage = () => {
         { variant: "error" }
       );
     } else {
+      const currentExpense = { ...expense, amount: Number(expense.amount) };
       setExpenses((prevExpenses) => {
         localStorage.setItem(
           "expenses",
-          JSON.stringify([...prevExpenses, expense])
+          JSON.stringify([...prevExpenses, currentExpense])
         );
-        return [...prevExpenses, expense];
+        return [...prevExpenses, currentExpense];
       });
       enqueueSnackbar("Expense added successfully!", {
         variant: "success",
@@ -88,10 +88,10 @@ const HomePage = () => {
             updateBalance={addBalance}
           />
           <TotalExpense expenses={expenses} updateExpense={addExpense} />
-          <ExpenseSummary />
+          <ExpenseSummary expenses={expenses} />
         </div>
         <div className="transactions">
-          <ExpenseList />
+          <ExpenseList expenses={expenses} />
           <ExpenseTrends />
         </div>
       </main>

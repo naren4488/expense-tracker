@@ -88,7 +88,7 @@ const AddExpenseModal = ({ updateExpense }: Props) => {
                 />
                 <input
                   placeholder="Enter amount"
-                  value={expense.amount}
+                  value={expense.amount || ""}
                   name="amount"
                   type="number"
                   onChange={(e) => handleInputChange(e)}

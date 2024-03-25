@@ -1,0 +1,24 @@
+.expense-summary {
+  /* border: solid; */
+  flex: 1;
+  height: 250px;
+}
+
+.expense-summary h3 {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.custom-tooltip {
+  background-color: white;
+  padding: 16px;
+  border-radius: 16px;
+  color: black;
+}
+
+@media all and (max-width: 576px) {
+  .expense-summary {
+    flex: auto;
+    height: 300px;
+  }
+}

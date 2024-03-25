@@ -6,7 +6,7 @@ type Props = {
 };
 
 const ExpenseList = ({ expenses }: Props) => {
-  console.log(expenses);
+  // console.log(expenses);
   if (!expenses.length) {
     return <span>No expense Trends to show</span>;
   } else {

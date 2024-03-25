@@ -12,6 +12,7 @@ import { TypeExpense } from "../../pages/HomePage";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;
+// to get customized label to show for pie chart
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -44,6 +45,7 @@ const renderCustomizedLabel = ({
   );
 };
 
+// to show custom tooltip for pie chart
 const CustomTooltip = ({
   active,
   payload = [{ value: 100, name: "food" }],
@@ -67,26 +69,49 @@ type Props = {
 };
 
 const ExpenseSummary = ({ expenses }: Props) => {
+  /**
+   * to merge similar category expenses at one place
+   * @param expenseList  list of expenses
+   * @returns {name: string, value : number} merged expenses in array
+   */
+  const getData = (expenseList: TypeExpense[]) => {
+    const map = new Map();
+    expenseList.map((expense) => {
+      if (map.has(expense.category)) {
+        map.set(expense.category, map.get(expense.category) + expense.amount);
+      } else {
+        map.set(expense.category, expense.amount);
+      }
+    });
+    const data = [];
+    for (const [key, value] of map) {
+      data.push({ name: key, value });
+    }
+    return data;
+  };
+
   if (!expenses.length) {
     return <span>No expenses to show</span>;
   } else {
+    const data = getData(expenses);
+
     return (
       <div className="expense-summary">
         <h3>Expense summary</h3>
-        <ResponsiveContainer width="100%" height="80%">
+        <ResponsiveContainer width="100%" height="90%">
           <PieChart>
             <Pie
-              data={expenses}
+              data={data}
               cx="50%"
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
               outerRadius={80}
               fill="#8884d8"
-              dataKey="amount"
-              nameKey="category"
+              dataKey="value"
+              nameKey="name"
             >
-              {expenses.map((_, index) => (
+              {data.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
@@ -97,7 +122,7 @@ const ExpenseSummary = ({ expenses }: Props) => {
               content={
                 <CustomTooltip
                   active={true}
-                  payload={[{ value: 0, name: "food" }]}
+                  payload={[{ value: 0, name: "category" }]}
                 />
               }
             />

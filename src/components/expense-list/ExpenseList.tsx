@@ -6,15 +6,16 @@ import { useEffect, useState } from "react";
 
 type Props = {
   expenses: TypeExpense[];
+  handleDelete: (index: number, currentPage: number, PageSize: number) => void;
 };
 
 const PageSize = 3;
 
-const ExpenseList = ({ expenses }: Props) => {
+const ExpenseList = ({ expenses, handleDelete }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  console.log(expenses, totalPages, currentPage);
+  // console.log(expenses, totalPages, currentPage);
 
   // initial total pages calculation for pagination
   useEffect(() => {
@@ -52,7 +53,12 @@ const ExpenseList = ({ expenses }: Props) => {
                       </button>
                     </td>
                     <td>
-                      <button id="delete-btn">
+                      <button
+                        id="delete-btn"
+                        onClick={() =>
+                          handleDelete(index, currentPage, PageSize)
+                        }
+                      >
                         <MdDelete size={15} fill="red" />
                       </button>
                     </td>

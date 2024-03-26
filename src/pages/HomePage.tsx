@@ -76,6 +76,23 @@ const HomePage = () => {
     }
   };
 
+  const handleDelete = (
+    index: number,
+    currentPage: number,
+    PageSize: number
+  ) => {
+    const actualIndex = index + (currentPage - 1) * PageSize;
+    const updatedExpenses = expenses.filter((_, i) => i != actualIndex);
+    addBalance(expenses[actualIndex].amount);
+    setExpenses(() => {
+      localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+      return updatedExpenses;
+    });
+    enqueueSnackbar("Expense deleted!", {
+      variant: "success",
+    });
+  };
+
   return (
     <div className="home-page">
       <header>
@@ -91,7 +108,7 @@ const HomePage = () => {
           <ExpenseSummary expenses={expenses} />
         </div>
         <div className="transactions">
-          <ExpenseList expenses={expenses} />
+          <ExpenseList expenses={expenses} handleDelete={handleDelete} />
           <ExpenseTrends expenses={expenses} />
         </div>
       </main>

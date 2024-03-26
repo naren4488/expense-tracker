@@ -76,6 +76,12 @@ const HomePage = () => {
     }
   };
 
+  /**
+   * delete the expense in expense list and update wallet balance accordingly
+   * @param index index of expense to be deleted
+   * @param currentPage current page number of table
+   * @param PageSize limit of expenses for a page in expense table
+   */
   const handleDelete = (
     index: number,
     currentPage: number,
@@ -93,6 +99,43 @@ const HomePage = () => {
     });
   };
 
+  const handleEdit = (
+    index: number,
+    currentPage: number,
+    PageSize: number,
+    editedExpense: TypeExpense
+  ) => {
+    const currentExpense = {
+      ...editedExpense,
+      amount: Number(editedExpense.amount),
+    };
+    const actualIndex = index + (currentPage - 1) * PageSize;
+    const prevAmount = expenses[actualIndex].amount;
+    const newAmount = currentExpense.amount;
+    let updatedExpenses: TypeExpense[];
+    if (actualIndex === 0) {
+      updatedExpenses = expenses.slice(1);
+      updatedExpenses.unshift(currentExpense);
+    } else if (actualIndex === expenses.length - 1) {
+      updatedExpenses = expenses.slice(0, expenses.length - 1);
+      updatedExpenses.push(currentExpense);
+    } else {
+      updatedExpenses = expenses.map((expense, i) => {
+        if (i !== actualIndex) return expense;
+        else return currentExpense;
+      });
+    }
+    console.log(updatedExpenses);
+    setExpenses(() => {
+      localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+      return updatedExpenses;
+    });
+    enqueueSnackbar("Expense edited successfully!", {
+      variant: "success",
+    });
+    addBalance(prevAmount - newAmount);
+  };
+
   return (
     <div className="home-page">
       <header>
@@ -108,7 +151,11 @@ const HomePage = () => {
           <ExpenseSummary expenses={expenses} />
         </div>
         <div className="transactions">
-          <ExpenseList expenses={expenses} handleDelete={handleDelete} />
+          <ExpenseList
+            expenses={expenses}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
           <ExpenseTrends expenses={expenses} />
         </div>
       </main>

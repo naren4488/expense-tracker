@@ -1,21 +1,26 @@
-import { FaChevronLeft, FaChevronRight, FaEdit } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { TypeExpense } from "../../pages/HomePage";
 import "./ExpenseList.css";
 import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from "react";
+import EditExpenseModal from "../edit-expense-modal/EditExpenseModal";
 
 type Props = {
   expenses: TypeExpense[];
   handleDelete: (index: number, currentPage: number, PageSize: number) => void;
+  handleEdit: (
+    index: number,
+    currentPage: number,
+    PageSize: number,
+    editedExpense: TypeExpense
+  ) => void;
 };
 
 const PageSize = 3;
 
-const ExpenseList = ({ expenses, handleDelete }: Props) => {
+const ExpenseList = ({ expenses, handleDelete, handleEdit }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
-  // console.log(expenses, totalPages, currentPage);
 
   // initial total pages calculation for pagination
   useEffect(() => {
@@ -25,6 +30,10 @@ const ExpenseList = ({ expenses, handleDelete }: Props) => {
   const handlePageChange = (page: number) => {
     console.log("page: ", page);
     setCurrentPage(page);
+  };
+
+  const editExpense = (index: number, editedExpense: TypeExpense) => {
+    handleEdit(index, currentPage, PageSize, editedExpense);
   };
 
   if (!expenses.length) {
@@ -48,9 +57,19 @@ const ExpenseList = ({ expenses, handleDelete }: Props) => {
                     </td>
                     <td>{expense.amount}</td>
                     <td>
-                      <button id="edit-btn">
+                      {/* <button
+                        id="edit-btn"
+                        onClick={() => handleEdit(index, currentPage, PageSize)}
+                      >
                         <FaEdit size={15} fill="white" />
-                      </button>
+                      </button> */}
+                      <EditExpenseModal
+                        currentExpense={
+                          expenses[index + (currentPage - 1) * PageSize]
+                        }
+                        index={index}
+                        updateExpense={editExpense}
+                      />
                     </td>
                     <td>
                       <button

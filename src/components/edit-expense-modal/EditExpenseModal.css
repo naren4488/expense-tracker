@@ -1,0 +1,57 @@
+.edit-expense-btn {
+  cursor: pointer;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(255, 153, 0);
+  color: white;
+}
+
+.edit-expense-btn:hover {
+  background-color: rgb(195, 118, 2);
+}
+
+.expense-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.expense-form {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.form-input-wrap {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+}
+
+.expense-form input {
+  padding: 8px;
+  border-radius: 8px;
+  border: solid 1px;
+  width: 100%;
+}
+
+form .edit-balance-btn {
+  margin: 0;
+}
+
+.expense-cancel-btn {
+  background-color: transparent;
+  color: black;
+  border: solid 1px black;
+}
+
+.expense-cancel-btn:hover {
+  background-color: #f3f3f3;
+}
+
+@media all and (max-width: 576px) {
+}

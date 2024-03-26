@@ -37,7 +37,6 @@ const ExpenseTrends = ({ expenses }: Props) => {
     const latestExpenses = data
       .sort((a, b) => b.date.localeCompare(a.date))
       .slice(0, 3);
-    console.log(latestExpenses);
 
     return (
       <div className="expense-trends">
@@ -57,7 +56,7 @@ const ExpenseTrends = ({ expenses }: Props) => {
               tick={{}}
               type="number"
               label={{
-                value: "Pages",
+                value: "Amount",
                 position: "bottom",
                 offset: 0,
               }}

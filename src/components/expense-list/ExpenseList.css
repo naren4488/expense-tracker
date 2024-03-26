@@ -1,0 +1,66 @@
+.expense-list {
+  /* flex: 1; */
+  background-color: var(--bg-secondary);
+  padding: 32px 32px;
+  border-radius: 16px;
+  text-align: center;
+  flex: 1;
+}
+
+.expense-list h3 {
+  margin-bottom: 20px;
+}
+
+.expense-table {
+  /* border: solid; */
+  overflow-x: auto;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  /* text-align: left; */
+  border-collapse: collapse;
+}
+
+table tr td {
+  border-bottom: solid 1px;
+  text-align: left;
+  padding: 12px 0 4px 0;
+}
+
+.first-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-date {
+  font-size: 10px;
+  color: rgb(203, 202, 202);
+}
+
+table * button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination button {
+  background-color: transparent;
+  border: solid 0.5px white;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.active-btn {
+  background-color: white !important;
+  color: black !important;
+}

@@ -28,15 +28,21 @@ const AddBalanceModal = ({ updateBalance }: Props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [amount, setAmount] = useState<string>("");
 
+  // to opens modal
   function openModal() {
     setAmount("");
     setIsOpen(true);
   }
 
+  // to close modal
   function closeModal() {
     setIsOpen(false);
   }
 
+  /**
+   * to handle the form submit
+   * @param e event object for form
+   */
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const value = Number(amount);

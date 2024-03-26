@@ -31,7 +31,7 @@ const CustomTooltip = ({
 
 const ExpenseTrends = ({ expenses }: Props) => {
   if (!expenses.length) {
-    return <span>No expenses to show</span>;
+    return <span>No expenses trends available</span>;
   } else {
     const data = [...expenses];
     const latestExpenses = data

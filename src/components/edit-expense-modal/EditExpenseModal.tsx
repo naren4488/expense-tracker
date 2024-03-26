@@ -31,6 +31,7 @@ Modal.setAppElement("#root");
 const EditExpenseModal = ({ index, updateExpense, currentExpense }: Props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [expense, setExpense] = useState<TypeExpense>(currentExpense);
+
   function openModal() {
     setExpense(currentExpense);
     setIsOpen(true);
@@ -40,6 +41,10 @@ const EditExpenseModal = ({ index, updateExpense, currentExpense }: Props) => {
     setIsOpen(false);
   }
 
+  /**
+   * to handle input changes in form input boxes
+   * @param e event object for input elements
+   */
   const handleInputChange = (e: {
     target: { name: string; value: string | number };
   }) => {
@@ -48,6 +53,10 @@ const EditExpenseModal = ({ index, updateExpense, currentExpense }: Props) => {
     });
   };
 
+  /**
+   * to handle form submit
+   * @param e event object for the form
+   */
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (expense.amount <= 0) {
@@ -64,9 +73,6 @@ const EditExpenseModal = ({ index, updateExpense, currentExpense }: Props) => {
       <button id="edit-btn" onClick={openModal}>
         <FaEdit size={15} fill="white" />
       </button>
-      {/* <button className="add-expense-btn" onClick={openModal}>
-        + Add Expense
-      </button> */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

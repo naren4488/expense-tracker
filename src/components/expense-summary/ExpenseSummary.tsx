@@ -91,7 +91,7 @@ const ExpenseSummary = ({ expenses }: Props) => {
   };
 
   if (!expenses.length) {
-    return <span>No expenses to show</span>;
+    return <span>No expenses summary to display</span>;
   } else {
     const data = getData(expenses);
 

@@ -43,6 +43,10 @@ const AddExpenseModal = ({ updateExpense }: Props) => {
     setIsOpen(false);
   }
 
+  /**
+   * to handle input changes in form input boxes
+   * @param e event object for input elements
+   */
   const handleInputChange = (e: {
     target: { name: string; value: string | number };
   }) => {
@@ -51,6 +55,10 @@ const AddExpenseModal = ({ updateExpense }: Props) => {
     });
   };
 
+  /**
+   * to handle form submit
+   * @param e event object for the form
+   */
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (expense.amount <= 0) {

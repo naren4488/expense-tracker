@@ -34,7 +34,6 @@ const HomePage = () => {
       const expenses: TypeExpense[] = JSON.parse(dataLS);
       setExpenses(expenses);
     } else {
-      console.log(JSON.stringify(expenses));
       localStorage.setItem("expenses", JSON.stringify(expenses));
     }
   }, []);
@@ -99,6 +98,13 @@ const HomePage = () => {
     });
   };
 
+  /**
+   * edit the expense in expense list and update wallet balance if required
+   * @param index index of expense to be edited
+   * @param currentPage current page number of table
+   * @param PageSize limit of expenses for a page in expense table
+   * @param editedExpense data of edited expense
+   */
   const handleEdit = (
     index: number,
     currentPage: number,
@@ -109,9 +115,11 @@ const HomePage = () => {
       ...editedExpense,
       amount: Number(editedExpense.amount),
     };
+
     const actualIndex = index + (currentPage - 1) * PageSize;
     const prevAmount = expenses[actualIndex].amount;
     const newAmount = currentExpense.amount;
+
     let updatedExpenses: TypeExpense[];
     if (actualIndex === 0) {
       updatedExpenses = expenses.slice(1);
@@ -125,7 +133,7 @@ const HomePage = () => {
         else return currentExpense;
       });
     }
-    console.log(updatedExpenses);
+
     setExpenses(() => {
       localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
       return updatedExpenses;
@@ -133,6 +141,7 @@ const HomePage = () => {
     enqueueSnackbar("Expense edited successfully!", {
       variant: "success",
     });
+
     addBalance(prevAmount - newAmount);
   };
 

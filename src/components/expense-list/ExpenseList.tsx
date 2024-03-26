@@ -27,11 +27,19 @@ const ExpenseList = ({ expenses, handleDelete, handleEdit }: Props) => {
     setTotalPages(Math.ceil(expenses.length / PageSize));
   }, [expenses]);
 
+  /**
+   * to handle page change from pagination
+   * @param page current page number
+   */
   const handlePageChange = (page: number) => {
-    console.log("page: ", page);
     setCurrentPage(page);
   };
 
+  /**
+   * to handle edit changes in expense
+   * @param index index of current edited expense
+   * @param editedExpense new updated data of expense
+   */
   const editExpense = (index: number, editedExpense: TypeExpense) => {
     handleEdit(index, currentPage, PageSize, editedExpense);
   };
@@ -57,12 +65,6 @@ const ExpenseList = ({ expenses, handleDelete, handleEdit }: Props) => {
                     </td>
                     <td>{expense.amount}</td>
                     <td>
-                      {/* <button
-                        id="edit-btn"
-                        onClick={() => handleEdit(index, currentPage, PageSize)}
-                      >
-                        <FaEdit size={15} fill="white" />
-                      </button> */}
                       <EditExpenseModal
                         currentExpense={
                           expenses[index + (currentPage - 1) * PageSize]

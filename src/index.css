@@ -4,3 +4,13 @@
   padding: 0;
   max-width: 1440px;
 }
+
+:root {
+  --bg-primary: #0c0a2d;
+  --bg-secondary: #1a1648;
+  font-family: "Acumin Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+}

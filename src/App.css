@@ -1,9 +1,3 @@
-:root {
-  --bg-primary: #0c0a2d;
-  --bg-secondary: #1a1648;
-  font-family: "Acumin Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
 .app {
   background-color: var(--bg-primary);
   color: white;

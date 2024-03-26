@@ -2,11 +2,11 @@ Project - Expense Tracker
 
 Discription - An application to track expenses of a user with user-friendly UI design and with visualisation components including Pie chart to show expenses summary bases on category & Bar chart to show latest expense trends based on date and with functionalities of add wallet balance, add new expense, edit and deleted already existing expense.
 
-Live website link -
-
-Youtube link -
+Live website link - https://expense-tracker-narendra-kajlas-projects.vercel.app/
 
 <!-- Technologies -->
+
+Technologies
 
 - React + Vite : for frontend
 - TypeScript : as programming langauge inside react
@@ -18,15 +18,13 @@ Youtube link -
 
 <!-- Steps to run-->
 
-Download/Clone project code from git repo - https://github.com/naren4488/expense-tracker
+Steps to run the project
 
-Start the installation of project packages by running command : $ npm install
-
-Run the project using command : $ npm run dev
-
-To build : $ npm run build
-
-To preview after build : $ npm run preview
+1. Download/Clone project code from git repo - https://github.com/naren4488/expense-tracker
+2. Start the installation of project packages by running command : $ npm install
+3. Run the project using command : $ npm run dev
+4. To build : $ npm run build
+5. To preview after build : $ npm run preview
 
 <!-- Pages and Components -->
 

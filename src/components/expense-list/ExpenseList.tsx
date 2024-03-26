@@ -1,4 +1,4 @@
-import { FaEdit } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaEdit } from "react-icons/fa";
 import { TypeExpense } from "../../pages/HomePage";
 import "./ExpenseList.css";
 import { MdDelete } from "react-icons/md";
@@ -11,14 +11,20 @@ type Props = {
 const PageSize = 3;
 
 const ExpenseList = ({ expenses }: Props) => {
-  const [currentPage, setCurrentPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  console.log(expenses, totalPages);
+  console.log(expenses, totalPages, currentPage);
 
+  // initial total pages calculation for pagination
   useEffect(() => {
     setTotalPages(Math.ceil(expenses.length / PageSize));
   }, [expenses]);
+
+  const handlePageChange = (page: number) => {
+    console.log("page: ", page);
+    setCurrentPage(page);
+  };
 
   if (!expenses.length) {
     return <span>No expenses to show</span>;
@@ -56,18 +62,34 @@ const ExpenseList = ({ expenses }: Props) => {
           </table>
         </div>
         <div className="pagination">
-          <button>Previous</button>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`${currentPage === 1 && "disable-btn"}`}
+          >
+            <FaChevronLeft />
+          </button>
           {Array(totalPages)
             .fill(0)
             .map((_, index) => (
               <button
-                className={`${index + 1 === currentPage && "active-btn"}`}
+                disabled={currentPage === index + 1}
+                className={`${
+                  index + 1 === currentPage && "active-btn disable-btn"
+                }`}
                 key={index}
+                onClick={() => handlePageChange(index + 1)}
               >
                 {index + 1}
               </button>
             ))}
-          <button>Next</button>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`${currentPage === totalPages && "disable-btn"}`}
+          >
+            <FaChevronRight />
+          </button>
         </div>
       </div>
     );

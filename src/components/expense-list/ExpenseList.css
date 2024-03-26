@@ -49,6 +49,8 @@ table * button {
   margin-top: 16px;
   display: flex;
   gap: 8px;
+  width: 100%;
+  /* border: solid; */
   justify-content: center;
 }
 
@@ -58,6 +60,11 @@ table * button {
   color: white;
   padding: 8px 12px;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.disable-btn {
+  cursor: default !important;
 }
 
 .active-btn {
